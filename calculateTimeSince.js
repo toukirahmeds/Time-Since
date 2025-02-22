@@ -25,20 +25,11 @@ const outputUnits = {
         "calculate": (timeNow, timeSince) => {
             let totalYears = 0;
             let currentDate = timeSince;
-            let prevYearDate;
+            const prevYearDate = new Date(timeNow);
+            prevYearDate.setFullYear(timeNow.getFullYear() - 1);
 
-            while (currentDate < timeNow) {
-                if (currentDate.getFullYear() === timeNow.getFullYear()) {
-                    break;
-                }
-
-                prevYearDate = new Date(timeNow)
-                prevYearDate.setFullYear(timeNow.getFullYear() - 1);
-                
-                if (currentDate <= prevYearDate) {
-                    totalYears++;
-                }
-
+            while (currentDate <= prevYearDate) {
+                totalYears++;
                 currentDate.setFullYear(currentDate.getFullYear() + 1);
             }
 
@@ -47,26 +38,19 @@ const outputUnits = {
     },
     "month": {
         "title": "month",
-        "calculate": timeSince => {
-            const { timeNow } = getTimeValues(timeSince);
-            
+        "calculate": (timeNow, timeSince) => {
             let totalMonths = 0;
+            let currentDate = timeSince;
 
-            for (
-                let currentYear = timeSince.getFullYear();
-                currentYear <= timeNow.getFullYear();
-                currentYear++
-            ) {
-                if (currentYear === timeNow.getFullYear()) {
-                    totalMonths += timeNow.getMonth();
-                } else if (currentYear === timeSince.getFullYear()) {
-                    totalMonths += (12 - timeSince.getMonth());
-                } else {
-                    totalMonths += 12;
-                }
+            const prevMonthDate = new Date(timeNow);
+            prevMonthDate.setMonth(timeNow.getMonth() - 1);
+
+            while (currentDate <= prevMonthDate) {
+                totalMonths++;
+                currentDate.setMonth(currentDate.getMonth() + 1);
             }
 
-            return totalMonths;
+            return totalMonths
         }
     },
     "week": {
