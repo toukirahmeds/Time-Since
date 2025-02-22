@@ -55,10 +55,18 @@ const outputUnits = {
     },
     "week": {
         "title": "week",
-        "calculate": timeSince => {
-            const { timeDiff } = getTimeValues(timeSince);
+        "calculate": (timeNow, timeSince) => {
+            let totalWeeks = 0;
+            let currentDate = timeSince;
+            const prevWeekDate = new Date(timeNow);
+            prevWeekDate.setDate(timeNow.getDate() - 7);
 
-            return parseInt(timeDiff / ONE_WEEK);
+            while (currentDate <= prevWeekDate) {
+                totalWeeks++;
+                currentDate.setDate(currentDate.getDate() + 7);
+            }
+            
+            return totalWeeks;
         }
     },
     "day": {
