@@ -9,11 +9,6 @@ const {
     calculateDecades,
 } = require("./helpers");
 
-const ONE_SECOND = 1000;
-const ONE_MINUTE = ONE_SECOND * 60;
-const ONE_HOUR = ONE_MINUTE * 60;
-const ONE_DAY = ONE_HOUR * 24;
-
 const outputUnits = {
     "year": {
         "title": "year",
@@ -46,6 +41,12 @@ const outputUnits = {
     "decade": {
         "title": "decade",
         "calculate": calculateDecades
+    },
+    "combined": {
+        "title": "combined",
+        "calculate": () => {
+
+        }
     }
 };
 

@@ -1,3 +1,10 @@
+const {
+    ONE_SECOND,
+    ONE_MINUTE,
+    ONE_HOUR,
+    ONE_DAY
+} = require("./constants");
+
 /**
  * Get the time difference in milliseconds.
  * 
