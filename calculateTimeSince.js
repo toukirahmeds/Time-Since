@@ -19,6 +19,15 @@ const getTimeValues = timeSince => {
     return { timeNow, timeDiff };
 }
 
+/**
+ * Get the time difference in milliseconds.
+ * 
+ * @param {Date} timeNow 
+ * @param {Date} timeSince 
+ * @returns 
+ */
+const getTimeDiff = (timeNow, timeSince) => timeNow.getTime() - timeSince.getTime();
+
 const outputUnits = {
     "year": {
         "title": "year",
@@ -42,9 +51,7 @@ const outputUnits = {
             prevTimeNow.setFullYear(timeSince.getFullYear());
             prevTimeNow.setMonth(timeSince.getMonth());
 
-            let totalMonths = 0;
-
-            totalMonths = (timeNow.getMonth() - timeSince.getMonth())
+            let totalMonths = (timeNow.getMonth() - timeSince.getMonth())
                     + (timeNow.getFullYear() - timeSince.getFullYear()) * 12;
             
             if (timeSince > prevTimeNow) {
@@ -57,17 +64,16 @@ const outputUnits = {
     "week": {
         "title": "week",
         "calculate": (timeNow, timeSince) => {
-            let totalWeeks = 0;
-            let currentDate = timeSince;
-            const prevWeekDate = new Date(timeNow);
-            prevWeekDate.setDate(timeNow.getDate() - 7);
+            const prevTimeNow = new Date(timeNow);
+            prevTimeNow.setFullYear(timeSince.getFullYear());
+            prevTimeNow.setMonth(timeSince.getMonth());
+            prevTimeNow.setDate(timeSince.getDate());
 
-            while (currentDate <= prevWeekDate) {
-                totalWeeks++;
-                currentDate.setDate(currentDate.getDate() + 7);
-            }
-            
-            return totalWeeks;
+            const timeDiff = getTimeDiff(timeNow, timeSince);
+
+            const totalWeeks = timeDiff / (ONE_DAY * 7);
+
+            return parseInt(totalWeeks);
         }
     },
     "day": {

@@ -1,3 +1,3 @@
 const calculateTimeSince = require("./calculateTimeSince");
 
-console.log(calculateTimeSince("2024-10-22", "month"));
+console.log(calculateTimeSince("1990-01-01", "week"));
