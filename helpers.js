@@ -5,6 +5,23 @@ const {
     ONE_DAY
 } = require("./constants");
 
+const getPluralSingular = (count) => count > 1 ? "s":"";
+
+const getUnitStatement = (count, unit) => 
+    `${count} ${unit}${getPluralSingular(count)}`;
+
+const getUpdatedStatement = (statement, count, unit) => {
+    if (count <= 0) {
+        return statement;
+    }
+
+    let currentStatement = statement;
+    currentStatement += currentStatement ? " " : "";
+    currentStatement += getUnitStatement(count, unit);
+    console.log(statement, count, unit)
+    return currentStatement;
+};
+
 /**
  * Get the time difference in milliseconds.
  * 
@@ -31,7 +48,10 @@ const calculateYears = (timeNow, timeSince) => {
         totalYears--;
     }
 
-    return totalYears;
+    return {
+        count: totalYears,
+        statement: getUnitStatement(totalYears, "year")
+    };
 };
 
 /**
@@ -53,7 +73,10 @@ const calculateMonths = (timeNow, timeSince) => {
         totalMonths--;
     }
 
-    return totalMonths;
+    return {
+        count: totalMonths,
+        statement: getUnitStatement(totalMonths, "month")
+    };
 };
 
 /**
@@ -71,7 +94,12 @@ const calculateWeeks = (timeNow, timeSince) => {
 
     const timeDiff = getTimeDiff(timeNow, timeSince);
 
-    return parseInt(timeDiff / (ONE_DAY * 7));
+    const totalWeeks = parseInt(timeDiff / (ONE_DAY * 7));
+
+    return {
+        count: totalWeeks,
+        statement: getUnitStatement(totalWeeks, "week")
+    };
 };
 
 /**
@@ -84,7 +112,12 @@ const calculateWeeks = (timeNow, timeSince) => {
 const calculateDays = (timeNow, timeSince) => {
     const timeDiff = getTimeDiff(timeNow, timeSince);
 
-    return parseInt(timeDiff / ONE_DAY);
+    const totalDays = parseInt(timeDiff / ONE_DAY);
+
+    return {
+        count: totalDays,
+        statement: getUnitStatement(totalDays, "day")
+    };
 };
 
 /**
@@ -97,7 +130,12 @@ const calculateDays = (timeNow, timeSince) => {
 const calculateHours = (timeNow, timeSince) => {
     const timeDiff = getTimeDiff(timeNow, timeSince);
 
-    return parseInt(timeDiff / ONE_HOUR);
+    const totalHours = parseInt(timeDiff / ONE_HOUR);
+
+    return {
+        count: totalHours,
+        statement: getUnitStatement(totalHours, "hour")
+    }
 };
 
 /**
@@ -110,7 +148,12 @@ const calculateHours = (timeNow, timeSince) => {
 const calculateMinutes = (timeNow, timeSince) => {
     const timeDiff = getTimeDiff(timeNow, timeSince);
 
-    return parseInt(timeDiff / ONE_MINUTE);
+    const totalMinutes = parseInt(timeDiff / ONE_MINUTE);
+
+    return {
+        count: totalMinutes,
+        statement: getUnitStatement(totalMinutes, "minute")
+    };
 };
 
 /**
@@ -123,7 +166,12 @@ const calculateMinutes = (timeNow, timeSince) => {
 const calculateSeconds = (timeNow, timeSince) => {
     const timeDiff = getTimeDiff(timeNow, timeSince);
 
-    return parseInt(timeDiff / ONE_SECOND);
+    const totalSeconds = parseInt(timeDiff / ONE_SECOND);
+
+    return {
+        count: totalSeconds,
+        statement: getUnitStatement(totalSeconds, "second")
+    };
 };
 
 /**
@@ -136,21 +184,13 @@ const calculateSeconds = (timeNow, timeSince) => {
 const calculateDecades = (timeNow, timeSince) => {
     const totalYears = calculateYears(timeNow, timeSince);
 
-    return parseInt(totalYears / 10);
+    const totalDecades = parseInt(totalYears / 10);
+
+    return {
+        count: totalDecades,
+        statement: getUnitStatement(totalDecades, "decade")
+    };
 };
-
-const getPluralSingular = (count) => count > 1 ? "s":"";
-const getUpdatedStatement = (statement, count, unit) => {
-    if (count <= 0) {
-        return statement;
-    }
-
-    let currentStatement = statement;
-    currentStatement += currentStatement ? " " : "";
-    currentStatement += `${count} ${unit}${getPluralSingular(count)}`;
-
-    return currentStatement;
-}
 
 /**
  * Calculate the time since in combined format.
@@ -162,32 +202,32 @@ const calculateCombined = (timeNow, timeSince) => {
     const currentTime = new Date(timeSince);
     let statement = "";
     
-    const totalYears = calculateYears(timeNow, currentTime);
+    const { count: totalYears } = calculateYears(timeNow, currentTime);
     statement = getUpdatedStatement(statement, totalYears, "year");
 
     currentTime.setFullYear(currentTime.getFullYear() + totalYears);
 
-    const totalMonths = calculateMonths(timeNow, currentTime);
+    const { count: totalMonths } = calculateMonths(timeNow, currentTime);
     statement = getUpdatedStatement(statement, totalMonths, "month");
 
     currentTime.setMonth(currentTime.getMonth() + totalMonths);
 
-    const totalDays = calculateDays(timeNow, currentTime);
+    const { count: totalDays } = calculateDays(timeNow, currentTime);
     statement = getUpdatedStatement(statement, totalDays, "day");
 
     currentTime.setDate(currentTime.getDate() + totalDays);
 
-    const totalHours = calculateHours(timeNow, currentTime);
+    const { count: totalHours } = calculateHours(timeNow, currentTime);
     statement = getUpdatedStatement(statement, totalHours, "hour");
 
     currentTime.setHours(currentTime.getHours() + totalHours);
 
-    const totalMinutes = calculateMinutes(timeNow, currentTime);
+    const { count: totalMinutes } = calculateMinutes(timeNow, currentTime);
     statement = getUpdatedStatement(statement, totalMinutes, "minute");
 
     currentTime.setMinutes(currentTime.getMinutes() + totalMinutes);
 
-    const totalSeconds = calculateSeconds(timeNow, currentTime);
+    const { count: totalSeconds } = calculateSeconds(timeNow, currentTime);
     statement = getUpdatedStatement(statement, totalSeconds, "second");
 
     return { statement };
