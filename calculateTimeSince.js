@@ -78,8 +78,8 @@ const outputUnits = {
     },
     "day": {
         "title": "day",
-        "calculate": timeSince => {
-            const { timeDiff } = getTimeValues(timeSince);
+        "calculate": (timeNow, timeSince) => {
+            const timeDiff = getTimeDiff(timeNow, timeSince);
 
             return parseInt(timeDiff / ONE_DAY);
         }
