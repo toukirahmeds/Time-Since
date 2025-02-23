@@ -7,6 +7,7 @@ const {
     calculateMinutes,
     calculateSeconds,
     calculateDecades,
+    calculateCombined
 } = require("./helpers");
 
 const outputUnits = {
@@ -44,9 +45,7 @@ const outputUnits = {
     },
     "combined": {
         "title": "combined",
-        "calculate": () => {
-
-        }
+        "calculate": calculateCombined
     }
 };
 

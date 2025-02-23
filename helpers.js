@@ -137,7 +137,61 @@ const calculateDecades = (timeNow, timeSince) => {
     const totalYears = calculateYears(timeNow, timeSince);
 
     return parseInt(totalYears / 10);
+};
+
+const getPluralSingular = (count) => count > 1 ? "s":"";
+const getUpdatedStatement = (statement, count, unit) => {
+    if (count <= 0) {
+        return statement;
+    }
+
+    let currentStatement = statement;
+    currentStatement += currentStatement ? " " : "";
+    currentStatement += `${count} ${unit}${getPluralSingular(count)}`;
+
+    return currentStatement;
 }
+
+/**
+ * Calculate the time since in combined format.
+ * 
+ * @param {Date} timeNow 
+ * @param {Date} timeSince 
+ */
+const calculateCombined = (timeNow, timeSince) => {
+    const currentTime = new Date(timeSince);
+    let statement = "";
+    
+    const totalYears = calculateYears(timeNow, currentTime);
+    statement = getUpdatedStatement(statement, totalYears, "year");
+
+    currentTime.setFullYear(currentTime.getFullYear() + totalYears);
+
+    const totalMonths = calculateMonths(timeNow, currentTime);
+    statement = getUpdatedStatement(statement, totalMonths, "month");
+
+    currentTime.setMonth(currentTime.getMonth() + totalMonths);
+
+    const totalDays = calculateDays(timeNow, currentTime);
+    statement = getUpdatedStatement(statement, totalDays, "day");
+
+    currentTime.setDate(currentTime.getDate() + totalDays);
+
+    const totalHours = calculateHours(timeNow, currentTime);
+    statement = getUpdatedStatement(statement, totalHours, "hour");
+
+    currentTime.setHours(currentTime.getHours() + totalHours);
+
+    const totalMinutes = calculateMinutes(timeNow, currentTime);
+    statement = getUpdatedStatement(statement, totalMinutes, "minute");
+
+    currentTime.setMinutes(currentTime.getMinutes() + totalMinutes);
+
+    const totalSeconds = calculateSeconds(timeNow, currentTime);
+    statement = getUpdatedStatement(statement, totalSeconds, "second");
+
+    return { statement };
+};
 
 module.exports = {
     getTimeDiff,
@@ -148,5 +202,6 @@ module.exports = {
     calculateHours,
     calculateMinutes,
     calculateSeconds,
-    calculateDecades
+    calculateDecades,
+    calculateCombined
 };

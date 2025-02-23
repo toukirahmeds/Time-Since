@@ -17,7 +17,7 @@ const acceptabletoUnitValues = [
  * @param {Array<string} cmdLineArgs 
  */
 const processCmdLineArgs = (cmdLineArgs) => {
-    console.log(calculateTimeSince("1990-01-01T10:53:00.000Z", "decade"));
+    console.log(calculateTimeSince("1990-01-01T10:53:00.000Z", "combined"));
 };
 
 module.exports = processCmdLineArgs;
