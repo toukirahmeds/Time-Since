@@ -114,6 +114,14 @@ const outputUnits = {
 
             return parseInt(timeDiff / ONE_SECOND);
         }
+    },
+    "decade": {
+        "title": "decade",
+        "calculate": (timeNow, timeSince) => {
+            const totalYears = calculateYears(timeNow, timeSince);
+
+            return parseInt(totalYears / 10);
+        }
     }
 };
 
