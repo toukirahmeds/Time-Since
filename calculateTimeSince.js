@@ -23,12 +23,16 @@ const outputUnits = {
     "year": {
         "title": "year",
         "calculate": (timeNow, timeSince) => {
-            const prevYearDate = new Date(timeNow);
-            prevYearDate.setFullYear(timeNow.getFullYear() - 1);
+            const prevTimeNow = new Date(timeNow);
+            prevTimeNow.setFullYear(timeSince.getFullYear());
 
-            return timeSince < prevYearDate
-                ? timeNow.getFullYear() - timeSince.getFullYear()
-                : 0
+            let totalYears = timeNow.getFullYear() - timeSince.getFullYear();
+
+            if (timeSince > prevTimeNow) {
+                totalYears--;
+            }
+
+            return totalYears;
         }
     },
     "month": {
