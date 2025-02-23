@@ -71,9 +71,7 @@ const outputUnits = {
 
             const timeDiff = getTimeDiff(timeNow, timeSince);
 
-            const totalWeeks = timeDiff / (ONE_DAY * 7);
-
-            return parseInt(totalWeeks);
+            return parseInt(timeDiff / (ONE_DAY * 7));
         }
     },
     "day": {
@@ -86,8 +84,8 @@ const outputUnits = {
     },
     "hour": {
         "title": "hour",
-        "calculate": timeSince => {
-            const { timeDiff } = getTimeValues(timeSince);
+        "calculate": (timeNow, timeSince) => {
+            const timeDiff = getTimeDiff(timeNow, timeSince);
 
             return parseInt(timeDiff / ONE_HOUR);
         }
