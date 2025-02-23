@@ -28,21 +28,30 @@ const getTimeValues = timeSince => {
  */
 const getTimeDiff = (timeNow, timeSince) => timeNow.getTime() - timeSince.getTime();
 
+/**
+ * Calculate the number of years since a specific time.
+ * 
+ * @param {Date} timeNow 
+ * @param {Date} timeSince 
+ * @returns {number}
+ */
+const calculateYears = (timeNow, timeSince) => {
+    const prevTimeNow = new Date(timeNow);
+    prevTimeNow.setFullYear(timeSince.getFullYear());
+
+    let totalYears = timeNow.getFullYear() - timeSince.getFullYear();
+
+    if (timeSince > prevTimeNow) {
+        totalYears--;
+    }
+
+    return totalYears;
+};
+
 const outputUnits = {
     "year": {
         "title": "year",
-        "calculate": (timeNow, timeSince) => {
-            const prevTimeNow = new Date(timeNow);
-            prevTimeNow.setFullYear(timeSince.getFullYear());
-
-            let totalYears = timeNow.getFullYear() - timeSince.getFullYear();
-
-            if (timeSince > prevTimeNow) {
-                totalYears--;
-            }
-
-            return totalYears;
-        }
+        "calculate": calculateYears
     },
     "month": {
         "title": "month",
