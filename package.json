@@ -1,0 +1,22 @@
+{
+  "name": "time-since",
+  "version": "1.0.0",
+  "description": "Calculate the time since a specific date time.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "time",
+    "since",
+    "decade",
+    "years",
+    "months",
+    "hours",
+    "minutes",
+    "seconds",
+    "calculate"
+  ],
+  "author": "toukirahmeds@gmail.com",
+  "license": "ISC"
+}
