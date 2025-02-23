@@ -1,52 +1,18 @@
+const {
+    calculateYears,
+    calculateMonths,
+    calculateWeeks,
+    calculateDays,
+    calculateHours,
+    calculateMinutes,
+    calculateSeconds,
+    calculateDecades,
+} = require("./helpers");
+
 const ONE_SECOND = 1000;
 const ONE_MINUTE = ONE_SECOND * 60;
 const ONE_HOUR = ONE_MINUTE * 60;
 const ONE_DAY = ONE_HOUR * 24;
-const ONE_WEEK = ONE_DAY * 7;
-const ONE_MONTH = ONE_DAY * 30;
-const ONE_YEAR = ONE_DAY * 365;
-
-const getTimeValues = timeSince => {
-    const timeNow = new Date();
-
-    timeSince.setHours(timeNow.getHours());
-    timeSince.setMinutes(timeNow.getMinutes());
-    timeSince.setSeconds(timeNow.getSeconds());
-    timeSince.setMilliseconds(timeNow.getMilliseconds());
-
-    const timeDiff = timeNow.getTime() - timeSince.getTime();
-
-    return { timeNow, timeDiff };
-}
-
-/**
- * Get the time difference in milliseconds.
- * 
- * @param {Date} timeNow 
- * @param {Date} timeSince 
- * @returns 
- */
-const getTimeDiff = (timeNow, timeSince) => timeNow.getTime() - timeSince.getTime();
-
-/**
- * Calculate the number of years since a specific time.
- * 
- * @param {Date} timeNow 
- * @param {Date} timeSince 
- * @returns {number}
- */
-const calculateYears = (timeNow, timeSince) => {
-    const prevTimeNow = new Date(timeNow);
-    prevTimeNow.setFullYear(timeSince.getFullYear());
-
-    let totalYears = timeNow.getFullYear() - timeSince.getFullYear();
-
-    if (timeSince > prevTimeNow) {
-        totalYears--;
-    }
-
-    return totalYears;
-};
 
 const outputUnits = {
     "year": {
@@ -55,73 +21,31 @@ const outputUnits = {
     },
     "month": {
         "title": "month",
-        "calculate": (timeNow, timeSince) => {
-            const prevTimeNow = new Date(timeNow);
-            prevTimeNow.setFullYear(timeSince.getFullYear());
-            prevTimeNow.setMonth(timeSince.getMonth());
-
-            let totalMonths = (timeNow.getMonth() - timeSince.getMonth())
-                    + (timeNow.getFullYear() - timeSince.getFullYear()) * 12;
-            
-            if (timeSince > prevTimeNow) {
-                totalMonths--;
-            }
-
-            return totalMonths;
-        }
+        "calculate": calculateMonths
     },
     "week": {
         "title": "week",
-        "calculate": (timeNow, timeSince) => {
-            const prevTimeNow = new Date(timeNow);
-            prevTimeNow.setFullYear(timeSince.getFullYear());
-            prevTimeNow.setMonth(timeSince.getMonth());
-            prevTimeNow.setDate(timeSince.getDate());
-
-            const timeDiff = getTimeDiff(timeNow, timeSince);
-
-            return parseInt(timeDiff / (ONE_DAY * 7));
-        }
+        "calculate": calculateWeeks
     },
     "day": {
         "title": "day",
-        "calculate": (timeNow, timeSince) => {
-            const timeDiff = getTimeDiff(timeNow, timeSince);
-
-            return parseInt(timeDiff / ONE_DAY);
-        }
+        "calculate": calculateDays
     },
     "hour": {
         "title": "hour",
-        "calculate": (timeNow, timeSince) => {
-            const timeDiff = getTimeDiff(timeNow, timeSince);
-
-            return parseInt(timeDiff / ONE_HOUR);
-        }
+        "calculate": calculateHours
     },
     "minute": {
         "title": "minute",
-        "calculate": (timeNow, timeSince) => {
-            const timeDiff = getTimeDiff(timeNow, timeSince);
-
-            return parseInt(timeDiff / ONE_MINUTE);
-        }
+        "calculate": calculateMinutes
     },
     "second": {
         "title": "second",
-        "calculate": (timeNow, timeSince) => {
-            const timeDiff = getTimeDiff(timeNow, timeSince);
-
-            return parseInt(timeDiff / ONE_SECOND);
-        }
+        "calculate": calculateSeconds
     },
     "decade": {
         "title": "decade",
-        "calculate": (timeNow, timeSince) => {
-            const totalYears = calculateYears(timeNow, timeSince);
-
-            return parseInt(totalYears / 10);
-        }
+        "calculate": calculateDecades
     }
 };
 
