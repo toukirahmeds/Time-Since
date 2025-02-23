@@ -128,7 +128,7 @@ const outputUnits = {
 /**
  * Calculate the time since a specific date.
  * 
- * @param {Date} timeSince
+ * @param {string} timeSinceStr
  * @param {string} outputUnit
  */
 const calculateTimeSince = (timeSinceStr, outputUnit) => {
