@@ -5,11 +5,32 @@ const {
     ONE_DAY
 } = require("./constants");
 
+/**
+ * Get 's' for singular or plural.
+ * 
+ * @param {number} count 
+ * @returns {string}
+ */
 const getPluralSingular = (count) => count > 1 ? "s":"";
 
+/**
+ * Get the statement for unit.
+ * 
+ * @param {number} count 
+ * @param {string} unit 
+ * @returns {string}
+ */
 const getUnitStatement = (count, unit) => 
     `${count} ${unit}${getPluralSingular(count)}`;
 
+/**
+ * Get the updated statement for combined unit statement.
+ * 
+ * @param {string} statement 
+ * @param {number} count 
+ * @param {string} unit 
+ * @returns {string}
+ */
 const getUpdatedStatement = (statement, count, unit) => {
     if (count <= 0) {
         return statement;
@@ -18,7 +39,7 @@ const getUpdatedStatement = (statement, count, unit) => {
     let currentStatement = statement;
     currentStatement += currentStatement ? " " : "";
     currentStatement += getUnitStatement(count, unit);
-    console.log(statement, count, unit)
+
     return currentStatement;
 };
 
@@ -27,7 +48,7 @@ const getUpdatedStatement = (statement, count, unit) => {
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
- * @returns 
+ * @returns {number}
  */
 const getTimeDiff = (timeNow, timeSince) => timeNow.getTime() - timeSince.getTime();
 
@@ -36,7 +57,10 @@ const getTimeDiff = (timeNow, timeSince) => timeNow.getTime() - timeSince.getTim
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
- * @returns {number}
+ * @returns {{
+ *      count: number,
+ *      statement: string
+ * }}
  */
 const calculateYears = (timeNow, timeSince) => {
     const prevTimeNow = new Date(timeNow);
@@ -59,7 +83,10 @@ const calculateYears = (timeNow, timeSince) => {
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
- * @returns {number}
+ * @returns {{
+ *      count: number,
+ *      statement: string
+ * }}
  */
 const calculateMonths = (timeNow, timeSince) => {
     const prevTimeNow = new Date(timeNow);
@@ -84,7 +111,10 @@ const calculateMonths = (timeNow, timeSince) => {
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
- * @returns {number}
+ * @returns {{
+ *      count: number,
+ *      statement: string
+ * }}
  */
 const calculateWeeks = (timeNow, timeSince) => {
     const prevTimeNow = new Date(timeNow);
@@ -107,7 +137,10 @@ const calculateWeeks = (timeNow, timeSince) => {
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
- * @returns {number}
+ * @returns {{
+ *      count: number,
+ *      statement: string
+ * }}
  */
 const calculateDays = (timeNow, timeSince) => {
     const timeDiff = getTimeDiff(timeNow, timeSince);
@@ -125,7 +158,10 @@ const calculateDays = (timeNow, timeSince) => {
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
- * @returns {number}
+ * @returns {{
+ *      count: number,
+ *      statement: string
+ * }}
  */
 const calculateHours = (timeNow, timeSince) => {
     const timeDiff = getTimeDiff(timeNow, timeSince);
@@ -143,7 +179,10 @@ const calculateHours = (timeNow, timeSince) => {
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
- * @returns {number}
+ * @returns {{
+ *      count: number,
+ *      statement: string
+ * }}
  */
 const calculateMinutes = (timeNow, timeSince) => {
     const timeDiff = getTimeDiff(timeNow, timeSince);
@@ -161,7 +200,10 @@ const calculateMinutes = (timeNow, timeSince) => {
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
- * @returns {number}
+ * @returns {{
+ *      count: number,
+ *      statement: string
+ * }}
  */
 const calculateSeconds = (timeNow, timeSince) => {
     const timeDiff = getTimeDiff(timeNow, timeSince);
@@ -179,7 +221,10 @@ const calculateSeconds = (timeNow, timeSince) => {
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
- * @returns {number}
+ * @returns {{
+ *      count: number,
+ *      statement: string
+ * }}
  */
 const calculateDecades = (timeNow, timeSince) => {
     const totalYears = calculateYears(timeNow, timeSince);
@@ -196,7 +241,10 @@ const calculateDecades = (timeNow, timeSince) => {
  * Calculate the time since in combined format.
  * 
  * @param {Date} timeNow 
- * @param {Date} timeSince 
+ * @param {Date} timeSince
+ * @returns {{
+ *      statement: string
+ * }}
  */
 const calculateCombined = (timeNow, timeSince) => {
     const currentTime = new Date(timeSince);
