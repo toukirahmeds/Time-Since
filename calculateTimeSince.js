@@ -100,8 +100,8 @@ const outputUnits = {
     },
     "second": {
         "title": "second",
-        "calculate": timeSince => {
-            const { timeDiff } = getTimeValues(timeSince);
+        "calculate": (timeNow, timeSince) => {
+            const timeDiff = getTimeDiff(timeNow, timeSince);
 
             return parseInt(timeDiff / ONE_SECOND);
         }
