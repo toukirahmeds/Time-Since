@@ -113,6 +113,11 @@ const calculateTimeSince = (timeSinceStr, outputUnit) => {
     const timeSince = new Date(timeSinceStr);
     const timeNow = new Date();
 
+    if (timeSince > timeNow) {
+        console.error("Time Since is more than Time Now.");
+        process.exit();
+    }
+
     const outputUnitProps = outputUnits[outputUnit];
 
     return outputUnitProps.calculate(timeNow, timeSince);
