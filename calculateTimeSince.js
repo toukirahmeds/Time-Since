@@ -38,18 +38,20 @@ const outputUnits = {
     "month": {
         "title": "month",
         "calculate": (timeNow, timeSince) => {
+            const prevTimeNow = new Date(timeNow);
+            prevTimeNow.setFullYear(timeSince.getFullYear());
+            prevTimeNow.setMonth(timeSince.getMonth());
+
             let totalMonths = 0;
-            let currentDate = timeSince;
 
-            const prevMonthDate = new Date(timeNow);
-            prevMonthDate.setMonth(timeNow.getMonth() - 1);
-
-            while (currentDate <= prevMonthDate) {
-                totalMonths++;
-                currentDate.setMonth(currentDate.getMonth() + 1);
+            totalMonths = (timeNow.getMonth() - timeSince.getMonth())
+                    + (timeNow.getFullYear() - timeSince.getFullYear()) * 12;
+            
+            if (timeSince > prevTimeNow) {
+                totalMonths--;
             }
 
-            return totalMonths
+            return totalMonths;
         }
     },
     "week": {
