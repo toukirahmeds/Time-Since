@@ -7,7 +7,8 @@ const {
     calculateMinutes,
     calculateSeconds,
     calculateDecades,
-    calculateCombined
+    calculateCombined,
+    printManualAndExit
 } = require("./helpers");
 
 const outputUnits = {
@@ -52,11 +53,16 @@ const outputUnits = {
 /**
  * Calculate the time since a specific date.
  * 
- * @param {string} timeSinceStr
+ * @param {string} dateTimeSinceStr
  * @param {string} outputUnit
  */
-const calculateTimeSince = (timeSinceStr, outputUnit) => {
-    const timeSince = new Date(timeSinceStr);
+const calculateTimeSince = (dateTimeSinceStr, outputUnit) => {
+    const timeSince = new Date(dateTimeSinceStr);
+
+    if (isNaN(timeSince.getTime())) {
+        printManualAndExit();
+    }
+
     const timeNow = new Date();
 
     if (timeSince > timeNow) {

@@ -1,15 +1,6 @@
 const calculateTimeSince = require("./calculateTimeSince");
-const acceptabletoUnitValues = [
-    "year",
-    "month",
-    "week",
-    "day",
-    "hour",
-    "minute",
-    "second",
-    "decade",
-    "combined"
-];
+const { printManualAndExit } = require("./helpers");
+const { ACCEPTABLE_UNIT_ARG_VALUES } = require("./constants");
 
 /**
  * Calculate time since from command line arguments
@@ -17,12 +8,27 @@ const acceptabletoUnitValues = [
  * @param {Array<string} cmdLineArgs 
  */
 const processCmdLineArgs = (cmdLineArgs) => {
-    const dateRegExp = new RegExp(/\d\d\d\d-\d\d-\d\d/, "g");
+    const dateArg = cmdLineArgs.find(item => item.startsWith("--sinceDate="));
 
-    const dateStr = cmdLineArgs.find(item => dateRegExp.exec(item));
+    if (!dateArg) {
+        printManualAndExit();
+    }
+
+    const dateValue = dateArg.replace("--sinceDate=", "");
+
+    const toUnitArg = cmdLineArgs.find(item => item.startsWith("--toUnit="));
+
+    if (!toUnitArg) {
+        printManualAndExit();
+    }
+
+    const toUnit = toUnitArg.replace("--toUnit=", "");
+
+    if (!ACCEPTABLE_UNIT_ARG_VALUES.includes(toUnit)) {
+        printManualAndExit();
+    }
     
-    
-    console.log(calculateTimeSince("1990-01-01T10:53:00.000Z", "combined"));
+    return calculateTimeSince(dateValue, toUnit);
 };
 
 module.exports = processCmdLineArgs;

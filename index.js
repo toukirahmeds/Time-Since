@@ -12,9 +12,13 @@ console.log(timeSince);
 const cmdLineArgs = process.argv.slice(2, 4);
 
 const main = async () => {
+    let result;
+
     if (cmdLineArgs.length > 0) {
-        processCmdLineArgs(cmdLineArgs);
+        result = processCmdLineArgs(cmdLineArgs);
     }
+
+    console.log(result);
 };
 
 main();

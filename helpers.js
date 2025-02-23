@@ -281,6 +281,14 @@ const calculateCombined = (timeNow, timeSince) => {
     return { statement };
 };
 
+/**
+ * Prints manual and exit.
+ */
+const printManualAndExit = () => {
+    console.log("Print manual here.")
+    process.exit();
+};
+
 module.exports = {
     getTimeDiff,
     calculateYears,
@@ -291,5 +299,6 @@ module.exports = {
     calculateMinutes,
     calculateSeconds,
     calculateDecades,
-    calculateCombined
+    calculateCombined,
+    printManualAndExit
 };
