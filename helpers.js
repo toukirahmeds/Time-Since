@@ -2,7 +2,8 @@ const {
     ONE_SECOND,
     ONE_MINUTE,
     ONE_HOUR,
-    ONE_DAY
+    ONE_DAY,
+    ACCEPTABLE_UNIT_ARG_VALUES
 } = require("./constants");
 
 /**
@@ -289,6 +290,17 @@ const printManualAndExit = () => {
     process.exit();
 };
 
+/**
+ * Check whether the value of {toUnit} is valid.
+ * 
+ * @param {string} toUnit
+ */
+const validateToUnit = toUnit => {
+    if (!ACCEPTABLE_UNIT_ARG_VALUES.includes(toUnit)) {
+        printManualAndExit();
+    }
+};
+
 module.exports = {
     getTimeDiff,
     calculateYears,
@@ -300,5 +312,6 @@ module.exports = {
     calculateSeconds,
     calculateDecades,
     calculateCombined,
-    printManualAndExit
+    printManualAndExit,
+    validateToUnit
 };

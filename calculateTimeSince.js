@@ -12,6 +12,10 @@ const {
 } = require("./helpers");
 
 const outputUnits = {
+    "decade": {
+        "title": "decade",
+        "calculate": calculateDecades
+    },
     "year": {
         "title": "year",
         "calculate": calculateYears
@@ -40,10 +44,6 @@ const outputUnits = {
         "title": "second",
         "calculate": calculateSeconds
     },
-    "decade": {
-        "title": "decade",
-        "calculate": calculateDecades
-    },
     "combined": {
         "title": "combined",
         "calculate": calculateCombined
@@ -55,6 +55,10 @@ const outputUnits = {
  * 
  * @param {string} dateTimeSinceStr
  * @param {string} outputUnit
+ * @returns {{
+ *      count: number,
+ *      statement: string
+ * }}
  */
 const calculateTimeSince = (dateTimeSinceStr, outputUnit) => {
     const timeSince = new Date(dateTimeSinceStr);

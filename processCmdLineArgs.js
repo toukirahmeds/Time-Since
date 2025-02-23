@@ -1,11 +1,15 @@
 const calculateTimeSince = require("./calculateTimeSince");
-const { printManualAndExit } = require("./helpers");
+const { printManualAndExit, validateToUnit } = require("./helpers");
 const { ACCEPTABLE_UNIT_ARG_VALUES } = require("./constants");
 
 /**
  * Calculate time since from command line arguments
  * 
- * @param {Array<string} cmdLineArgs 
+ * @param {Array<string} cmdLineArgs
+ * @returns {{
+ *      count: number,
+ *      statement: string
+ * }}
  */
 const processCmdLineArgs = (cmdLineArgs) => {
     const dateArg = cmdLineArgs.find(item => item.startsWith("--sinceDate="));
@@ -23,10 +27,7 @@ const processCmdLineArgs = (cmdLineArgs) => {
     }
 
     const toUnit = toUnitArg.replace("--toUnit=", "");
-
-    if (!ACCEPTABLE_UNIT_ARG_VALUES.includes(toUnit)) {
-        printManualAndExit();
-    }
+    validateToUnit(toUnit);
     
     return calculateTimeSince(dateValue, toUnit);
 };
