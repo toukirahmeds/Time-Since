@@ -3,7 +3,8 @@ const {
     ONE_MINUTE,
     ONE_HOUR,
     ONE_DAY,
-    ACCEPTABLE_UNIT_ARG_VALUES
+    ACCEPTABLE_UNIT_ARG_VALUES,
+    MANUAL_TEXT
 } = require("./constants");
 
 /**
@@ -286,7 +287,7 @@ const calculateCombined = (timeNow, timeSince) => {
  * Prints manual and exit.
  */
 const printManualAndExit = () => {
-    console.log("Print manual here.")
+    console.log(MANUAL_TEXT);
     process.exit();
 };
 
