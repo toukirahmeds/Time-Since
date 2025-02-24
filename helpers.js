@@ -8,7 +8,7 @@ const {
 } = require("./constants");
 
 /**
- * Get 's' for singular or plural.
+ * Get 's' based on singular or plural.
  * 
  * @param {number} count 
  * @returns {string}
@@ -55,7 +55,7 @@ const getUpdatedStatement = (statement, count, unit) => {
 const getTimeDiff = (timeNow, timeSince) => timeNow.getTime() - timeSince.getTime();
 
 /**
- * Calculate the number of years since a specific time.
+ * Calculate the number of years since a specific date time.
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
@@ -81,7 +81,7 @@ const calculateYears = (timeNow, timeSince) => {
 };
 
 /**
- * Calculate the number of months since a specific date.
+ * Calculate the number of months since a specific date time.
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
@@ -109,7 +109,7 @@ const calculateMonths = (timeNow, timeSince) => {
 };
 
 /**
- * Calculate the number of weeks since a specific date.
+ * Calculate the number of weeks since a specific date time.
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
@@ -135,7 +135,7 @@ const calculateWeeks = (timeNow, timeSince) => {
 };
 
 /**
- * Calculate the number of days since a specific date.
+ * Calculate the number of days since a specific date time.
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
@@ -156,7 +156,7 @@ const calculateDays = (timeNow, timeSince) => {
 };
 
 /**
- * Calculate the number of hours since a specific date.
+ * Calculate the number of hours since a specific date time.
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
@@ -177,7 +177,7 @@ const calculateHours = (timeNow, timeSince) => {
 };
 
 /**
- * Calculate the number of months since a specific date.
+ * Calculate the number of minutes since a specific date time.
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
@@ -198,7 +198,7 @@ const calculateMinutes = (timeNow, timeSince) => {
 };
 
 /**
- * Calculate the number of seconds since a specific date.
+ * Calculate the number of seconds since a specific date time.
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
@@ -219,7 +219,7 @@ const calculateSeconds = (timeNow, timeSince) => {
 };
 
 /**
- * Calculate the number of decades since a specific date.
+ * Calculate the number of decades since a specific date time.
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince 
@@ -240,7 +240,8 @@ const calculateDecades = (timeNow, timeSince) => {
 };
 
 /**
- * Calculate the time since in combined format.
+ * Calculate the time since in combined format since a
+ * specific date time.
  * 
  * @param {Date} timeNow 
  * @param {Date} timeSince
@@ -284,7 +285,7 @@ const calculateCombined = (timeNow, timeSince) => {
 };
 
 /**
- * Prints manual and exit.
+ * Prints manual and exit the program.
  */
 const printManualAndExit = () => {
     console.log(MANUAL_TEXT);

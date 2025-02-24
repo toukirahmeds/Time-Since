@@ -24,7 +24,7 @@ const calculateFuncs = {
 };
 
 /**
- * Calculate the time since a specific date.
+ * Calculate the time since a specific date time.
  * 
  * @param {string} dateTimeSinceStr
  * @param {string} outputUnit

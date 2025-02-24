@@ -4,6 +4,7 @@ const ONE_HOUR = ONE_MINUTE * 60;
 const ONE_DAY = ONE_HOUR * 24;
 
 const ACCEPTABLE_UNIT_ARG_VALUES = [
+    "decade",
     "year",
     "month",
     "week",
@@ -11,7 +12,6 @@ const ACCEPTABLE_UNIT_ARG_VALUES = [
     "hour",
     "minute",
     "second",
-    "decade",
     "combined"
 ];
 

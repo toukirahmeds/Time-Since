@@ -5,7 +5,7 @@ const { validateToUnit } = require("./helpers");
 const { PROMPT_DATE_TIME, PROMPT_TO_UNIT } = require("./constants");
 
 /**
- * Calculate time since from console input.
+ * Calculate the time since from console input.
  * 
  * @returns {{
  *      count: number,

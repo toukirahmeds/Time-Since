@@ -3,7 +3,7 @@ const { printManualAndExit, validateToUnit } = require("./helpers");
 const { ACCEPTABLE_UNIT_ARG_VALUES } = require("./constants");
 
 /**
- * Calculate time since from command line arguments
+ * Calculate the time since from command line arguments.
  * 
  * @param {Array<string} cmdLineArgs
  * @returns {{
