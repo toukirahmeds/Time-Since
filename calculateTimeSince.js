@@ -70,7 +70,7 @@ const calculateTimeSince = (dateTimeSinceStr, outputUnit) => {
     const timeNow = new Date();
 
     if (timeSince > timeNow) {
-        console.error("Time Since is more than Time Now.");
+        console.error("Time since is more than time now.");
         process.exit();
     }
 
