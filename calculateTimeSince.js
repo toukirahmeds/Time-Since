@@ -11,43 +11,16 @@ const {
     printManualAndExit
 } = require("./helpers");
 
-const outputUnits = {
-    "decade": {
-        "title": "decade",
-        "calculate": calculateDecades
-    },
-    "year": {
-        "title": "year",
-        "calculate": calculateYears
-    },
-    "month": {
-        "title": "month",
-        "calculate": calculateMonths
-    },
-    "week": {
-        "title": "week",
-        "calculate": calculateWeeks
-    },
-    "day": {
-        "title": "day",
-        "calculate": calculateDays
-    },
-    "hour": {
-        "title": "hour",
-        "calculate": calculateHours
-    },
-    "minute": {
-        "title": "minute",
-        "calculate": calculateMinutes
-    },
-    "second": {
-        "title": "second",
-        "calculate": calculateSeconds
-    },
-    "combined": {
-        "title": "combined",
-        "calculate": calculateCombined
-    }
+const calculateFuncs = {
+    "decade": calculateDecades,
+    "year": calculateYears,
+    "month": calculateMonths,
+    "week": calculateWeeks,
+    "day": calculateDays,
+    "hour": calculateHours,
+    "minute": calculateMinutes,
+    "second": calculateSeconds,
+    "combined": calculateCombined
 };
 
 /**
@@ -74,9 +47,9 @@ const calculateTimeSince = (dateTimeSinceStr, outputUnit) => {
         process.exit();
     }
 
-    const outputUnitProps = outputUnits[outputUnit];
+    const calculateFunc = calculateFuncs[outputUnit];
 
-    return outputUnitProps.calculate(timeNow, timeSince);
+    return calculateFunc(timeNow, timeSince);
 };
 
 module.exports = calculateTimeSince;

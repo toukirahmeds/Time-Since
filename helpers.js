@@ -229,7 +229,7 @@ const calculateSeconds = (timeNow, timeSince) => {
  * }}
  */
 const calculateDecades = (timeNow, timeSince) => {
-    const totalYears = calculateYears(timeNow, timeSince);
+    const { count: totalYears } = calculateYears(timeNow, timeSince);
 
     const totalDecades = parseInt(totalYears / 10);
 
