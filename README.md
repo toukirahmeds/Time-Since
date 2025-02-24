@@ -1,4 +1,4 @@
-# time-since
+# Time-Since
 Calculate the time since a specific date time.
 
 ## How to run
